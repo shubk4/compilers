@@ -72,19 +72,11 @@ ws      [ \t\f]+
     }
 }
 
-\"[^\n"]*\" {
+\"[^\n"]*\"|([-+]?[0-9]+\.?([eE][-+]?[0-9]+)?)|([-+]?[0-9]*\.[0-9]+([eE][-+]?[0-9]+)?) {
     /*string*/
-    mp[{yytext,"string"}]++;
+    mp[{yytext,"literals"}]++;
     if(ranges::find(vec,yytext,&pair<string,string>::first)==vec.end()){
-        vec.push_back({yytext,"string"});
-    }
-}
-
-([-+]?[0-9]+\.?([eE][-+]?[0-9]+)?)|([-+]?[0-9]*\.[0-9]+([eE][-+]?[0-9]+)?) {
-    /*numeric literals*/
-    mp[{yytext,"numeric"}]++;
-    if(ranges::find(vec,yytext,&pair<string,string>::first)==vec.end()){
-        vec.push_back({yytext,"numeric"});
+        vec.push_back({yytext,"literals"});
     }
 }
 

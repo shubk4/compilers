@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 11
-#define YY_END_OF_BUFFER 12
+#define YY_NUM_RULES 10
+#define YY_END_OF_BUFFER 11
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,18 +362,18 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[131] =
     {   0,
-        0,    0,   12,   10,    1,    3,   10,    6,    5,    5,
-        5,    9,    6,    5,    5,    7,    7,    7,    7,    7,
+        0,    0,   11,    9,    1,    3,    9,    6,    5,    5,
+        5,    8,    6,    5,    5,    7,    7,    7,    7,    7,
         7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,   10,   10,    1,    0,    8,
-        0,    9,    6,    9,    9,    0,    5,    7,    7,    7,
+        7,    7,    7,    7,    7,    9,    9,    1,    0,    8,
+        0,    8,    6,    8,    8,    0,    5,    7,    7,    7,
         7,    7,    7,    7,    4,    7,    7,    7,    7,    7,
         7,    4,    5,    7,    7,    7,    7,    7,    7,    7,
         7,    7,    7,    7,    7,    7,    7,    0,    2,    0,
-        0,    9,    7,    7,    7,    7,    7,    7,    7,    7,
+        0,    8,    7,    7,    7,    7,    7,    7,    7,    7,
         7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
 
-        7,    0,    9,    7,    7,    7,    7,    7,    7,    7,
+        7,    0,    8,    7,    7,    7,    7,    7,    7,    7,
         7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
         7,    7,    7,    7,    7,    7,    7,    7,    7,    0
     } ;
@@ -900,9 +900,9 @@ YY_RULE_SETUP
 #line 76 "problem1.l"
 {
     /*string*/
-    mp[{yytext,"string"}]++;
+    mp[{yytext,"literals"}]++;
     if(ranges::find(vec,yytext,&pair<string,string>::first)==vec.end()){
-        vec.push_back({yytext,"string"});
+        vec.push_back({yytext,"literals"});
     }
 }
 	YY_BREAK
@@ -910,29 +910,18 @@ case 9:
 YY_RULE_SETUP
 #line 84 "problem1.l"
 {
-    /*numeric literals*/
-    mp[{yytext,"numeric"}]++;
-    if(ranges::find(vec,yytext,&pair<string,string>::first)==vec.end()){
-        vec.push_back({yytext,"numeric"});
-    }
-}
-	YY_BREAK
-case 10:
-YY_RULE_SETUP
-#line 92 "problem1.l"
-{
     ofstream f;
     f.open("error.csv", ios::app);
     f<<yytext<<" "<<"!!!ERROR "<<line<<"\n";
     f.close();
 }
 	YY_BREAK
-case 11:
+case 10:
 YY_RULE_SETUP
-#line 99 "problem1.l"
+#line 91 "problem1.l"
 ECHO;
 	YY_BREAK
-#line 936 "lex.yy.c"
+#line 925 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1937,7 +1926,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 99 "problem1.l"
+#line 91 "problem1.l"
 
 
 int yywrap(){return(1);}
