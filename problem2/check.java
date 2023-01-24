@@ -1,0 +1,5 @@
+0x1.f_ffff_ffaff_ffffp1023
+0x1.f_ffff_fffbf_ffffP1023_
+0x_1.f_ffff_ffcff_ffffP1023
+0x1._f_ffff_ffff_ffffP1023
+17.77E89

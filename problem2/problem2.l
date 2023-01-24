@@ -14,12 +14,12 @@ operator "="|">"|"<"|"!"|"~"|"?"|":"|"->"|"=="|">="|"<="|"!="|"&&"|"||"|"++"|"--
 char \'([\']*[^\n']*)*\'
 str \"([\"]*[^\n"]*)*\"
 bool "true"|"false"
-dec [-]?[0-9]+|[-]?[1-9][0-9_]*[0-9]
+dec [-+]?[0-9]+|[-+]?[1-9][0-9_]*[0-9]
 oct [0][0-7_]*[0-7]
-hex ("0x"|"0X")[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F]
-bin ("0b"|"0B")[0-1][0-1_]*[0-1]
-floatd (([-]?[0-9][0-9_]*[0-9](\.?([eE][-]?[0-9][0-9_][0-9])?))|[fF])|([-]?([0-9]*|[0-9][0-9_]*[0-9])\.[0-9][0-9_]*[0-9]([eE][-]?[0-9][0-9_]*[0-9])?)
-floath (("0x"|"0X")[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F](\.?([pP][0-9a-fA-F][0-9a-fA-F_][0-9a-fA-F])?)|[fF])|(("0x"|"0X")([0-9a-fA-F]*|[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F])\.[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F]([pP][0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F])?)
+hex ("0x"|"0X")(([0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F])|([0-9a-fA-F]+))
+bin ("0b"|"0B")(([0-1][0-1_]*[0-1])|([0-1]+))
+floatd ([-+]?[0-9][0-9_]*[0-9](\.?([eE][-+]?[0-9][0-9_][0-9])?))|([-+]?([0-9]*|[0-9][0-9_]*[0-9])\.[0-9][0-9_]*[0-9]([eE][-+]?[0-9][0-9_]*[0-9])?)|([-+]?([0-9]+|[-+]?[1-9][0-9_]*[0-9])(\.([0-9]+|[-+]?[1-9][0-9_]*[0-9]))?[lL])
+floath (("0x"|"0X")[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F](\.?([pP][-+][0-9a-fA-F][0-9a-fA-F_][0-9a-fA-F])?)|[fF])|(("0x"|"0X")([0-9a-fA-F]*|([0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F]))\.[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F]([pP][-+][0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F])+)|(([0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F])|([0-9a-fA-F]+)\.([0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F])|([0-9a-fA-F]+)[fF])
         /*!!!!!!!LOGIC!!!!!!!*/
         /*1 Match the lexeme with it regular expression*/
         /*2 use of vector is to maintain the input order*/
@@ -103,15 +103,6 @@ floath (("0x"|"0X")[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F](\.?([pP][0-9a-fA-F][0-9a-
     mp[{yytext,"identifiers"}]++;
     if(ranges::find(vec,yytext,&pair<string,string>::first)==vec.end()){
         vec.push_back({yytext,"identifiers"});
-    }
-}
-
-
-([-+]?[0-9]+\.?([eE][-+]?[0-9]+)?)|([-+]?[0-9]*\.[0-9]+([eE][-+]?[0-9]+)?) {
-    /*numeric literals*/
-    mp[{yytext,"numeric"}]++;
-    if(ranges::find(vec,yytext,&pair<string,string>::first)==vec.end()){
-        vec.push_back({yytext,"numeric"});
     }
 }
 
