@@ -42,7 +42,7 @@ floath (("0x"|"0X")[0-9a-fA-F][0-9a-fA-F_]*[0-9a-fA-F](\.?([pP][-+][0-9a-fA-F][0
 
 {ws}    /* skip blanks and tabs */
 
-"/*"    {
+"/*"    { /*this code section is from official documentaion provided to us*/
         int c;
 
         while((c = yyinput()) != 0)
